@@ -200,7 +200,7 @@
 }
 
 
-@media (max-width:600px) {
+@media (max-width: 600px) {
     .header-container {
        flex-direction: column;
        height: var(--header-height-mobile);
@@ -213,7 +213,7 @@
     }
 }
 
-@media (max-width:468px) {
+@media (max-width: 468px) {
     .logo {
         font-size: 1.5rem;
     }
