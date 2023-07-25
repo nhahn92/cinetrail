@@ -1,27 +1,25 @@
-import { } from 'react'
-import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Header from './components/Header/Header'
-import ThemeContextProvider from './contexts/ThemeContext'
-import HomePage from './pages/HomePage/HomePage'
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Homepage from "./pages/Homepage/Homepage";
+import MovieDetails from "./pages/MovieDetails/MovieDetails";
 
 function App() {
-
-  const apiKey=import.meta.env.VITE_API_KEY;
-  const baseUrl=import.meta.env.VITE_BASE_URL;
-
   return (
-    <BrowserRouter>
-    <ThemeContextProvider>
-    
-      <Header apiKey={apiKey} baseUrl={baseUrl} />
-
-      <Routes>
-        <Route path="/" element={<HomePage apiKey={apiKey} baseUrl={baseUrl} />} />
-      </Routes>
-    
-    </ThemeContextProvider>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Header />
+          <Routes>
+            <Route path={"/"} element={<Homepage />} />
+            <Route path={"/movieDetails"} element={<MovieDetails />} />
+            {/* Universal selector should always be at the end */}
+            {/* It keeps the user on Homepage when the endpoint doesn't exist */}
+            <Route path={"*"} element={<Homepage />} />
+          </Routes>
+        <Footer />
+      </BrowserRouter>
+    </>
   )
 }
 

@@ -1,29 +1,19 @@
-import { useEffect } from 'react'
-import './HomePage.css'
-import Slider from '../../components/Slider/Slider'
-import MovieCard from '../../components/MovieCard/MovieCard'
-import axios from 'axios'
+import React from "react";
+import Slider from "../../components/Slider/Slider";
+import PopularMovies from "../../components/PopularMovies/PopularMovies";
+import TopRatedMovies from "../../components/TopRatedMovies/TopRatedMovies";
 
-function HomePage({apiKey, baseUrl}) {
-  const [popularMovies, setPopularMovies] = ([])
+import "./Homepage.css";
+import "../movies.css";
 
-  useEffect (
-    () => {
-      axios.get(`${baseUrl}/movie/popular?api_key=${apiKey}`)
-      .then(res => {
-        console.log(res.data.results)
-        setPopularMovies(res.data.results)
-      })
-      .catch(err => console.log(err))
-    }
-  )
-
+export default function Homepage() {
   return (
     <div className="homepage-container">
-        <Slider apiKey={apiKey} baseUrl={baseUrl} />
-        <MovieCard />
+      <Slider />
+      <div className="movies-wrapper">
+        <PopularMovies />
+        <TopRatedMovies />
+      </div>
     </div>
   )
 }
-
-export default HomePage

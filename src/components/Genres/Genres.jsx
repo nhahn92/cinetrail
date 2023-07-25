@@ -1,32 +1,32 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-function Genres({movieGenres, apiKey, baseUrl}) {
-    const [allGenres, setAllGenres] = useState([])
+export default function Genres({genreIds}) {
+    const [genres, setGenres] = useState([]);
 
     useEffect (
         () => {
-            axios.get(`${baseUrl}/genre/movie/list?api_key=${apiKey}`)
-            .then(res => {
-                setAllGenres(res.data.genres)
-            })
-            .catch (err => console.log(err))
-        }, [])
+            axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${import.meta.env.VITE_API_KEY}`)
+            .then(res => setGenres(res.data.genres))
+            .catch(err => console.log(err));
+        }, []
+    )
 
   return (
-    <div style={{display:"flex"}}>
-        <p>Genres:</p>
-            {movieGenres?.map((id, index) => {
-                const genre = allGenres.find(genre => genre.id === id);
-                return (
-                    <p key={id} style={{marginLeft:"5px"}}>
-                       {genre?.name}
-                       {index !== movieGenres.length - 1 && ','}
-                    </p>
-                )
-            })}
+    <div className="genre-container">
+        <p>Genres:&nbsp;</p>
+        {genreIds && genreIds.map((id, index) => {
+            for(let i = 0; i < genres.length; i++) {
+                if (genres[i].id === id) {
+                    return (
+                        <p key={id}>
+                            {genres[i].name}
+                            {index === genreIds.length - 1 ? "" : ","}&nbsp;
+                        </p>
+                    );
+                }
+            }
+        })}
     </div>
   )
 }
-
-export default Genres
