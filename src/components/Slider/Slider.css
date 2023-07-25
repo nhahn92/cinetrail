@@ -17,7 +17,7 @@
     cursor: pointer;
     position: absolute;
     top: 45%;
-    z-index: 2;
+    z-index: 1;
 }
 
 .right-arrow:hover, .left-arrow:hover {
@@ -37,7 +37,6 @@
     position: absolute;
     bottom: 0;
     width: 50%;
-    z-index: 1;
     color: var(--white);
     padding: 50px 60px;
     margin-bottom: 30px;

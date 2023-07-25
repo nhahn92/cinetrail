@@ -55,9 +55,9 @@ export default function Slider() {
         <p className="slider-description">{upcomingMovies[movieIndex]?.overview.slice(0, 130)}...</p>
         <Genres genreIds = {upcomingMovies[movieIndex]?.genre_ids} />
         <p>Release Date: {upcomingMovies[movieIndex]?.release_date}</p>
-        {/* If one side is true, the other side is false, nothing is returned. */}
-        {/* Without this logic, StarRating's rating returns NaN and tries to divide that by 2. */}
-        {/* With the AND operator, it won't return anything unless both sides are true. */}
+        {/* If one side is true, the other side is false, nothing is returned.
+        Without this logic, StarRating's rating returns NaN and tries to divide that by 2.
+        With the AND operator, it won't return anything unless both sides are true. */}
         <div className="rating">
           {upcomingMovies[movieIndex] && (
             <StarRatings
@@ -70,7 +70,7 @@ export default function Slider() {
             />
           )}
         </div>
-        <Link to="/movieDetails" className="see-details">See Details</Link>
+        <Link to={`/movieDetails/${upcomingMovies[movieIndex]?.id}`} className="see-details">See Details</Link>
       </div>
     </div>
   )
