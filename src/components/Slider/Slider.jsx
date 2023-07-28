@@ -53,7 +53,10 @@ export default function Slider() {
       <div className="slider-info">
         <h1>{upcomingMovies[movieIndex]?.title}</h1>
         <p className="slider-description">{upcomingMovies[movieIndex]?.overview.slice(0, 130)}...</p>
-        <Genres genreIds = {upcomingMovies[movieIndex]?.genre_ids} />
+        {/* If the API call isn't finished, it returns an empty array, which gives
+        the .map method an undefined value in Genres.jsx
+        This returns an empty array regardless */}
+        <Genres genreIds = {upcomingMovies[movieIndex] ? upcomingMovies[movieIndex]?.genre_ids : []} />
         <p>Release Date: {upcomingMovies[movieIndex]?.release_date}</p>
         {/* If one side is true, the other side is false, nothing is returned.
         Without this logic, StarRating's rating returns NaN and tries to divide that by 2.

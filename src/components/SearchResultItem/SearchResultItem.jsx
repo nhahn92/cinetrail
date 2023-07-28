@@ -17,6 +17,7 @@ export default function SearchResultItem({movie, setQuery}) {
                 ? `${import.meta.env.VITE_API_BASE_IMAGE_URL}${movie?.backdrop_path}`
                 : noImage
             }
+            alt={movie?.title}
         />
         <p>{movie?.title}</p>
     </Link>
