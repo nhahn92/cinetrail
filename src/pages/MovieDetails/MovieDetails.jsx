@@ -6,6 +6,7 @@ import StarRatings from "react-star-ratings";
 import { useParams } from "react-router-dom";
 
 import Genres from "../../components/Genres/Genres";
+import ReviewItem from "../../components/ReviewItem/ReviewItem";
 
 export default function MovieDetails() {
   const {movieId} = useParams();
@@ -37,7 +38,7 @@ export default function MovieDetails() {
           setTotalNumReviews(res.data.results.length)
       })
       .catch(err => console.log(err))
-    }, []
+    }, [movieId]
   )
 
   return (
@@ -87,6 +88,19 @@ export default function MovieDetails() {
             This returns an empty array to keep the page from crashing. */}
             <Genres genreIds={movie?.genres ? movie?.genres : []} component="details" />
           </div>
+        </div>
+        <div className="review-container">
+          <p className="reviews-title">Reviews</p>
+          {
+            reviews.slice(0, numReviewsToDisplay).map(review => (
+              <ReviewItem review={review} key={review.id} />
+            ))
+          }
+          {
+            numReviewsToDisplay < totalNumReviews
+            ? <p onClick={() => setNumReviewsToDisplay(prevState => prevState + 2)}>Read More Reviews</p>
+            : <p onClick={() => setNumReviewsToDisplay(3)}>End of Reviews. Collapse</p>
+          }
         </div>
       </div>
     </div>
