@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
 import axios from "axios";
 
 import ReactPlayer from "react-player";
@@ -9,6 +10,7 @@ import Genres from "../../components/Genres/Genres";
 import ReviewItem from "../../components/ReviewItem/ReviewItem";
 
 export default function MovieDetails() {
+  const {user} = useContext(UserContext);
   const {movieId} = useParams();
   // If expecting an object from the API call, use "null" as default value
   // Unless there's a default object to put in there
@@ -17,6 +19,21 @@ export default function MovieDetails() {
   const [reviews, setReviews] = useState([]);
   const [totalNumReviews, setTotalNumReviews] = useState(0);
   const [numReviewsToDisplay, setNumReviewsToDisplay] = useState(3);
+  const [added, setAdded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(
+    () => {
+      axios.post(`https://cinetrail-server.herokuapp.com/favoriteMovies/search`, {user_id:user?._id, tmdb_id:movie?.id})
+      .then(res => {
+        console.log(res)
+        if (res.data !== null) {
+          setAdded(true);
+        }
+      })
+      .catch(err => console.log(err)).finally(() => setLoaded(true));
+    }, []
+  )
 
   useEffect(
     () => {
@@ -33,13 +50,28 @@ export default function MovieDetails() {
 
       axios(`${import.meta.env.VITE_API_BASE_URL}${movieId}/reviews?api_key=${import.meta.env.VITE_API_KEY}`)
       .then(res => {
-          console.log(res.data.results);
           setReviews(res.data.results);
           setTotalNumReviews(res.data.results.length)
       })
       .catch(err => console.log(err))
     }, [movieId]
   )
+
+  const removeFromFavorites = () => {
+    axios.delete(`https://cinetrail-server.herokuapp.com/favoriteMovies/${user?._id}/${movie.id}`)
+    .then (res => {
+      setAdded(false);
+    })
+    .catch(err => console.log(err))
+  }
+
+  const addToFavorites = () => {
+    axios.post(`https://cinetrail-server.herokuapp.com/favoriteMovies/`, {user_id:user?._id, movie_id: movie?.id})
+    .then (res => {
+      setAdded(true);
+    })
+    .catch(err => console.log(err))
+  }
 
   return (
     <div className="movie-details-container">
@@ -62,6 +94,21 @@ export default function MovieDetails() {
       <div className="details-container">
         <div className="title-container">
           <h1>{movie?.title}</h1>
+          {added && loaded ? (
+            <span
+              className="remove-btn"
+              onClick={removeFromFavorites}
+            >
+              Remove from Favorites
+            </span>
+          ) : (
+            <span
+              className="add-btn"
+              onClick={addToFavorites}
+            >
+              Add to Favorites
+            </span>
+          )}
         </div>
         <div className="rating">
           {movie && (

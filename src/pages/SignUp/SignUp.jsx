@@ -23,7 +23,7 @@ export default function SignUp() {
                 setUsername("");
             }
         })
-        .catch(err => console.log(err))
+        .catch((err) => setMessage("Sorry, something happened. Please try again later."))
     };
 
   return (
@@ -71,11 +71,10 @@ export default function SignUp() {
                 </div>
                 {signupSuccess ? (
                     <p className="success-message">You signed up successfully!</p>
-                    ) : message ? (
-                    <p>{message}</p>
                     ) : (
-                    <p>Something went wrong, try again later</p>
-                )}
+                    <p>{message}</p>
+                    )
+                }
             </div>
         </form>
     </div>
