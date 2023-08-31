@@ -14,6 +14,13 @@ This website displays popular/current movies from TMDb API. It allows a user to 
 | Red | ![#E50916](https://via.placeholder.com/10/E50916?text=+) #E50916 |
 | White | ![#FFFFFF](https://via.placeholder.com/10/FFFFFF?text=+) #FFFFFF |
 
+## Features
+
+- Light/dark-mode toggle
+- Account creation
+- API retrieval
+- Pagination
+- Media queries for responsive design
 
 ## Relevant Links
 
