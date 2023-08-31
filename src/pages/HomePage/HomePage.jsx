@@ -5,10 +5,10 @@ import Slider from "../../components/Slider/Slider";
 import PopularMovies from "../../components/PopularMovies/PopularMovies";
 import TopRatedMovies from "../../components/TopRatedMovies/TopRatedMovies";
 
-import "./Homepage.css";
+import "./HomePage.css";
 import "../movies.css";
 
-export default function Homepage() {
+export default function HomePage() {
   const {darkMode, setDarkMode} = useContext(ThemeContext);
 
   return (
