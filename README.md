@@ -24,5 +24,5 @@ This website displays popular/current movies from TMDb API. It allows a user to 
 
 ## Relevant Links
 
-- [Live Website - Netlify](nicole-cinetrail.netlify.app)
+- [Live Website - Netlify](https://nicole-cinetrail.netlify.app/)
 - [API Link - TMDb](https://developer.themoviedb.org/reference/intro/getting-started)
