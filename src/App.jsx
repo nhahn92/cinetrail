@@ -21,9 +21,6 @@ function App() {
             <Route path={"/signup"} element={<SignUp />} />
             <Route path={"/signin"} element={<SignIn />} />
             <Route path={"/myFavorites"} element={<Favorites />} />
-            {/* Universal selector should always be at the end */}
-            {/* It keeps the user on Homepage when the endpoint doesn't exist */}
-            <Route path={"*"} element={<Homepage />} />
           </Routes>
           <Footer />
         </ContextReducer>
